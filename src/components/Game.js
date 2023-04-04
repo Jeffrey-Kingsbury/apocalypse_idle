@@ -14,9 +14,7 @@ const Game = () => {
     UPDATE_SKILL,
     UPDATE_HEALTH,
     UPDATE_WALLET,
-    UPDATE_EQUIPPED,
-    EQUIPMENT,
-    EQUIPMENT_STATS,
+    UPDATE_EQUIPPED
   } = useContext(userContext);
 
   const {
@@ -26,8 +24,7 @@ const Game = () => {
   const handleButtonClick = () => {
     UPDATE_SKILL("cooking", 50, player, setPlayer);
     UPDATE_INVENTORY("scrap metal", 1, player, setPlayer);
-    UPDATE_EQUIPPED(EQUIPMENT_STATS["stick"], player, setPlayer);
-    UPDATE_HEALTH(-10, player, setPlayer, setPlayerDead);
+    UPDATE_HEALTH(-6, player, setPlayer, setPlayerDead);
   };
 
   return (

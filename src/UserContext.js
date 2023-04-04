@@ -7,8 +7,7 @@ import {
   UPDATE_WALLET,
   UPDATE_EQUIPPED,
   UNEQUIP_ITEM,
-} from "./Engine";
-import { EQUIPMENT, EQUIPMENT_STATS } from "./Defaults";
+} from "./Engine/Engine";
 
 // Create the userContext for sharing data across components
 export const userContext = createContext();
@@ -51,8 +50,6 @@ const UserContext = ({ children }) => {
       UPDATE_WALLET,
       UPDATE_EQUIPPED,
       UNEQUIP_ITEM,
-      EQUIPMENT,
-      EQUIPMENT_STATS,
     }),
     [currentSkill, player, playerDead]
   );

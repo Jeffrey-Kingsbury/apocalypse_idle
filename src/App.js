@@ -1,6 +1,6 @@
 import UserContext from "./UserContext";
 import Game from "./components/Game";
-import Engine from "./Engine";
+import Engine from "./Engine/Engine";
 
 function App() {
 
