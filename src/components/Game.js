@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { userContext } from "../UserContext";
+import PlayerContainer from "./PlayerContainer";
 
 const Game = () => {
   const {
@@ -17,20 +18,12 @@ const Game = () => {
     UPDATE_EQUIPPED
   } = useContext(userContext);
 
-  const {
-    skills: { cooking },
-  } = player;
 
-  const handleButtonClick = () => {
-    UPDATE_SKILL("cooking", 50, player, setPlayer);
-    UPDATE_INVENTORY("scrap metal", 1, player, setPlayer);
-    UPDATE_HEALTH(-6, player, setPlayer, setPlayerDead);
-  };
 
   return (
     <Wrapper>
-      {cooking.xp > 0 && cooking.xp}
-      <button onClick={handleButtonClick}>click me</button>
+      <button onClick={() => UPDATE_EQUIPPED('stick', player, setPlayer)}>Equip a stick</button>
+      <PlayerContainer />
     </Wrapper>
   );
 };
@@ -42,6 +35,7 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: aliceblue;
+  user-select: none;
 `;
 
 const ItemContainer = styled.div`

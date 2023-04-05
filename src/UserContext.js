@@ -7,11 +7,11 @@ import {
   UPDATE_WALLET,
   UPDATE_EQUIPPED,
   UNEQUIP_ITEM,
+  CALCULATE_EQUPIMENT_BONUS
 } from "./Engine/Engine";
-
+import { ITEM_GENERATOR } from "./Engine/Items";
 // Create the userContext for sharing data across components
 export const userContext = createContext();
-
 // Define the UserContext component
 const UserContext = ({ children }) => {
   // State for the current skill and player data
@@ -50,6 +50,8 @@ const UserContext = ({ children }) => {
       UPDATE_WALLET,
       UPDATE_EQUIPPED,
       UNEQUIP_ITEM,
+      CALCULATE_EQUPIMENT_BONUS,
+      ITEM_GENERATOR,
     }),
     [currentSkill, player, playerDead]
   );

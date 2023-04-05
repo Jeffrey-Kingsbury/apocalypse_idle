@@ -10,10 +10,13 @@ class DEFAULT_ITEM {
 }
 
 class WEAPON extends DEFAULT_ITEM {
-	constructor(id, name, description, value, weight, damage, requiredLevels) {
+	constructor(id, name, description, value, weight, damage, twoHand, requiredLevels, bonusStats, slot) {
 		super(id, name, description, 'WEAPON', value, weight);
 		this.damage = damage;
+		this.twoHand = twoHand;
 		this.requiredLevels = requiredLevels;
+		this.bonusStats = bonusStats;
+		this.slot = slot;
 	}
 }
 
@@ -53,8 +56,8 @@ class EQUIPMENT extends DEFAULT_ITEM {
 		this.requiredLevels = requiredLevels;
 	}
 }
-const ITEM_GENERATOR = {
-	stick: new WEAPON('stick', 'Stick', 'A stick', 1, 1, 1, 1, { str: 1 }),
+export const ITEM_GENERATOR = {
+	stick: new WEAPON('stick', 'Stick', 'A stick', 1, 1, 1, true, { str: 1 }, { attack: 2}, 'weapon'),
 	fish: new FOOD('fish', 'Fish', 'A fish', 1, 1, 1, 1, { cooking: 1 }),
 };
 

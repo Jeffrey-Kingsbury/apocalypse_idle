@@ -22,10 +22,11 @@ export const DEFAULT_PLAYER = {
 		chest: null,
 		legs: null,
 		feet: null,
+		cloak: null,
 		head: null,
 		hands: null,
 		neck: null,
-		ring: null,
+		ring1: null,
 		ring2: null,
 	},
 };

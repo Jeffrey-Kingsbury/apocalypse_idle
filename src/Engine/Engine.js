@@ -1,6 +1,6 @@
 import { EXPERIENCE_TABLE, DEFAULT_PLAYER } from './Defaults';
 import { SKILLS } from './Skilling';
-import { ITEMS } from './Items';
+import { ITEMS, ITEM_GENERATOR } from './Items';
 
 /**
  * Function to load the player data from localStorage or use default values
@@ -71,7 +71,6 @@ export const LOAD_PLAYER = async () => {
 export const UPDATE_INVENTORY = (item, amount, player, setPlayer) => {
 	// Create a shallow copy of the player object to avoid modifying the original state
 	const updatedPlayer = { ...player };
-
 	// Calculate the updated amount of the item in the inventory
 	const updatedAmount = (updatedPlayer.inventory[item] || 0) + amount;
 
@@ -176,19 +175,19 @@ export const UPDATE_WALLET = (amount, player, setPlayer) => {
 export const UPDATE_EQUIPPED = (equipment_item, player, setPlayer) => {
 	// Create a shallow copy of the player object to avoid modifying the original state
 	const updatedPlayer = { ...player };
-
+	const item_detailed = ITEM_GENERATOR[equipment_item];
 	// Check if the player has an item equipped in the same slot and return it to the inventory if so
-	if (updatedPlayer.equipped[equipment_item.type]) {
-		const item = updatedPlayer.equipped[equipment_item.type];
-		updatedPlayer.equipped[equipment_item.type] = equipment_item.name;
+	if (updatedPlayer.equipped[item_detailed.type]) {
+		const item = updatedPlayer.equipped[item_detailed.slot];
+		updatedPlayer.equipped[item_detailed.slot] = equipment_item;
 		UPDATE_INVENTORY(item, 1, updatedPlayer, setPlayer);
-		UPDATE_INVENTORY(equipment_item.name, -1, updatedPlayer, setPlayer);
+		UPDATE_INVENTORY(equipment_item, -1, updatedPlayer, setPlayer);
 	} else {
 		// Equip the item
-		updatedPlayer.equipped[equipment_item.type] = equipment_item.name;
+		updatedPlayer.equipped[item_detailed.slot] = equipment_item;
 
 		// Remove the item from the inventory
-		UPDATE_INVENTORY(equipment_item.name, -1, updatedPlayer, setPlayer);
+		UPDATE_INVENTORY(equipment_item, -1, updatedPlayer, setPlayer);
 	}
 
 	// Update the player state with the modified equipped items
@@ -217,4 +216,28 @@ export const UNEQUIP_ITEM = (equipment_slot, player, setPlayer) => {
 
 	// Update the player state with the modified equipped items
 	setPlayer(updatedPlayer);
+};
+
+
+export const CALCULATE_EQUPIMENT_BONUS = (player) => {
+	const stats = {
+		attack: 0,
+		defence: 0,
+		strength: 0,
+		guns:0,
+		weight: 0,
+	};
+
+	Object.values(player.equipped).forEach((item) => {
+		if(!item) return;
+		if (item) {
+			stats.attack += ITEM_GENERATOR[item].bonusStats.attack;
+			stats.defence += ITEM_GENERATOR[item].bonusStats.defence;
+			stats.strength += ITEM_GENERATOR[item].bonusStats.strength;
+			stats.guns += ITEM_GENERATOR[item].bonusStats.guns;
+			stats.weight += ITEM_GENERATOR[item].weight;
+		}
+	});
+
+	return stats;
 };
