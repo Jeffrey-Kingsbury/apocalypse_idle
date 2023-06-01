@@ -2,6 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { userContext } from "../UserContext";
 import PlayerContainer from "./PlayerContainer";
+import Inventory from "./Inventory";
 
 const Game = () => {
   const {
@@ -24,6 +25,7 @@ const Game = () => {
     <Wrapper>
       <button onClick={() => UPDATE_EQUIPPED('stick', player, setPlayer)}>Equip a stick</button>
       <PlayerContainer />
+      <Inventory/>
     </Wrapper>
   );
 };
